@@ -4,7 +4,6 @@
     "version": "0.0.1",
     "dependencies": {
         "core": "*",
-        "microphone": "*", // 必要なければこれも削除可
         "pxt-midi": "github:microsoft/pxt-midi#v2.2.0"
     },
     "files": [
