@@ -22,35 +22,33 @@ const static uint8_t MIDIDataCharacteristicUUID_base[] = {
 };
 const static Uuid UUID_MIDI_DATA_CHAR(MIDIDataCharacteristicUUID_base);
 
+// カスタムイベントのソースIDとイベントコードを定義
+#define MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT (MICROBIT_ID_END + 1) // 新しいID
+enum MicroBitBleMidiTxServiceEvent {
+    MICROBIT_BLE_MIDI_TX_CONNECTED = 1,
+    MICROBIT_BLE_MIDI_TX_DISCONNECTED = 2,
+};
+
 class MicroBitBLEMIDIService : public MicroBitBLEService
 {
 public:
     GattCharacteristic midiDataCharacteristic;
 
-    // コンストラクタ
     MicroBitBLEMIDIService(MicroBit &microbit);
 
-    // 接続イベントハンドラ
+    // 既存の接続/切断イベントハンドラ
     void onConnection(const Gap::ConnectionCallbackParams *params);
-
-    // 切断イベントハンドラ
     void onDisconnection(const Gap::DisconnectionCallbackParams *params);
-
-    // 通知有効化イベントハンドラ
     void onUpdatesEnabled(const GattUpdatesEnabledCallbackParams *params);
-
-    // 通知無効化イベントハンドラ
     void onUpdatesDisabled(const GattUpdatesDisabledCallbackParams *params);
 
-    // MIDIデータを送信する関数
     bool sendMIDIData(const uint8_t *midi_data, uint16_t midi_len);
 
 private:
     BLE &ble;
     MicroBit &microbit;
-    bool notificationsEnabled; // 通知が有効化されているかのフラグ
-
-    static const int MIDI_MAX_PACKET_SIZE = 20; // BLEの最大MTUに合わせて調整可能 (23バイトがデフォルト、ヘッダ含め20が安全)
+    bool notificationsEnabled;
+    static const int MIDI_MAX_PACKET_SIZE = 20;
 };
 
 #endif // MICROBIT_BLE_MIDI_SERVICE_H

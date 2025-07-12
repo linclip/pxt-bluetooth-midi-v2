@@ -2,9 +2,8 @@
 
 // MicroBitインスタンスへのポインタ（グローバルまたはシングルトンで管理することが多い）
 // PXTのC++拡張機能では、通常 shim 関数内で MicroBit& を受け取る
-extern MicroBit uBit; // MakeCodeの実行環境が提供するグローバルなuBitインスタンス
-
-static MicroBitBLEMIDIService *instance = nullptr; // シングルトンインスタンス
+extern MicroBit uBit;
+static MicroBitBLEMIDIService *instance = nullptr;
 
 MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
     MicroBitBLEService(microbit_ref),
@@ -13,7 +12,7 @@ MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
     midiDataCharacteristic(UUID_MIDI_DATA_CHAR,
                            nullptr, 0,
                            MIDI_MAX_PACKET_SIZE,
-                           GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_NOTIFY) // 送信のみ
+                           GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_NOTIFY)// 送信のみ
 {
     // サービスの初期化
     GattCharacteristic *midiChars[] = {&midiDataCharacteristic};
@@ -36,16 +35,22 @@ MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
     instance = this; // シングルトンインスタンスを保存
 }
 
+
+
 void MicroBitBLEMIDIService::onConnection(const Gap::ConnectionCallbackParams *params)
 {
     // microbit.display.printAsync("MIDI Conn");
-    notificationsEnabled = false; // 接続時、通知はまだ有効になっていない
+    notificationsEnabled = false;
+    // 接続イベントをディスパッチ
+    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_CONNECTED);
 }
 
 void MicroBitBLEMIDIService::onDisconnection(const Gap::DisconnectionCallbackParams *params)
 {
     // microbit.display.printAsync("MIDI Disc");
-    notificationsEnabled = false; // 切断時、通知は無効
+    notificationsEnabled = false;
+    // 切断イベントをディスパッチ
+    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_DISCONNECTED);
 }
 
 void MicroBitBLEMIDIService::onUpdatesEnabled(const GattUpdatesEnabledCallbackParams *params)

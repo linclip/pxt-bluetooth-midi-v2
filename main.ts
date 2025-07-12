@@ -5,6 +5,11 @@
 namespace bleMidiTx {
     let _initialized = false;
 
+    // カスタムイベントソースIDとイベントコードを定義 (C++と一致させる)
+    const MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT = 3000; // micro:bit EventBus のカスタムID範囲に合わせる
+    const MICROBIT_BLE_MIDI_TX_CONNECTED = 1;
+    const MICROBIT_BLE_MIDI_TX_DISCONNECTED = 2;
+
     /**
      * Bluetooth MIDIサービスを初期化します。
      * このブロックは、プログラムの開始時に一度だけ呼び出してください。
@@ -69,15 +74,38 @@ namespace bleMidiTx {
 
     // 他のMIDIメッセージ（CC, PBなど）も同様に追加可能
 
+
+    /**
+  * Bluetooth MIDIデバイスが接続されたときに実行します。
+  * @param handler 接続時に実行されるコード
+  */
+    //% blockId="ble_midi_tx_on_connected" block="Bluetooth MIDIが接続されたとき"
+    //% subcategory="イベント"
+    //% draggableParameters="reporter"
+    export function onConnected(handler: () => void): void {
+        control.onEvent(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_CONNECTED, handler);
+    }
+
+    /**
+     * Bluetooth MIDIデバイスが切断されたときに実行します。
+     * @param handler 切断時に実行されるコード
+     */
+    //% blockId="ble_midi_tx_on_disconnected" block="Bluetooth MIDIが切断されたとき"
+    //% subcategory="イベント"
+    //% draggableParameters="reporter"
+    export function onDisconnected(handler: () => void): void {
+        control.onEvent(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_DISCONNECTED, handler);
+    }
+
     //% shim=bleMidiTx::_initMidiService
     function _initMidiService(): void {
         // C++実装
-        return
+        return;
     }
 
     //% shim=bleMidiTx::_sendMidiData
     function _sendMidiData(data: Buffer): void {
         // C++実装
-        return
+        return;
     }
 }
