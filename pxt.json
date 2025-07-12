@@ -1,27 +1,25 @@
 {
-    "name": "pxt-bluetooth-midi-v2",
-    "version": "0.0.0",
-    "description": "",
+    "name": "microbit-ble-midi-tx",
+    "description": "Bluetooth MIDI Transmit for micro:bit V2 with timestamping.",
+    "version": "0.0.1",
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "pxt-midi": "github:microsoft/pxt-midi#v2.2.0"
     },
     "files": [
-        "README.md",
-        "main.blocks",
-        "main.ts"
+        "main.ts",
+        "shims.d.ts",
+        "midiService.cpp",
+        "midiService.h"
     ],
     "testFiles": [
         "test.ts"
     ],
-    "public": true,
     "targetVersions": {
-        "target": "7.0.61",
+        "target": "6.0.25",
         "targetId": "microbit"
     },
-    "supportedTargets": [
-        "microbit"
-    ],
-    "preferredEditor": "tsprj"
+    "public": true
 }
