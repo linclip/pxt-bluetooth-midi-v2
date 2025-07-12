@@ -1,11 +1,10 @@
 {
-    "name": "microbit-bluetooth-midi-v2",
+    "name": "microbit-ble-midi-tx",
     "description": "Bluetooth MIDI Transmit for micro:bit V2 with timestamping.",
     "version": "0.0.1",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "microphone": "*",
+        "microphone": "*", // 必要なければこれも削除可
         "pxt-midi": "github:microsoft/pxt-midi#v2.2.0"
     },
     "files": [
