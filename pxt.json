@@ -9,6 +9,7 @@
     "files": [
         "main.ts",
         "shims.d.ts",
+        "enums.d.ts",
         "midiService.cpp",
         "midiService.h"
     ],
