@@ -106,7 +106,7 @@ bool MicroBitBLEMIDIService::sendMIDIData(const uint8_t *midi_data, uint16_t mid
 // --- PXT MakeCode Shims ---
 // TypeScript (main.ts) から呼び出されるC++関数
 
-namespace bleMidiTx {
+namespace bleMidiTx { // ★この行を追加！
     /**
      * Bluetooth MIDIサービスを初期化します。
      */
@@ -127,4 +127,4 @@ namespace bleMidiTx {
             instance->sendMIDIData((const uint8_t*)data->data, data->length);
         }
     }
-}
+} // ★この行を追加！
