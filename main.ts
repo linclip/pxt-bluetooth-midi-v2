@@ -72,10 +72,12 @@ namespace bleMidiTx {
     //% shim=bleMidiTx::_initMidiService
     function _initMidiService(): void {
         // C++実装
+        return
     }
 
     //% shim=bleMidiTx::_sendMidiData
     function _sendMidiData(data: Buffer): void {
         // C++実装
+        return
     }
 }
