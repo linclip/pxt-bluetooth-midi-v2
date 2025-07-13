@@ -42,7 +42,7 @@ void MicroBitBLEMIDIService::onConnection(const Gap::ConnectionCallbackParams *p
     notificationsEnabled = false;
     // 接続イベントをディスパッチ
     // 名前空間を明示的に指定
-    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, bleMidiTx::MICROBIT_BLE_MIDI_TX_CONNECTED);
+    //microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, bleMidiTx::MICROBIT_BLE_MIDI_TX_CONNECTED);
 }
 
 void MicroBitBLEMIDIService::onDisconnection(const Gap::DisconnectionCallbackParams *params)
@@ -50,7 +50,7 @@ void MicroBitBLEMIDIService::onDisconnection(const Gap::DisconnectionCallbackPar
     notificationsEnabled = false;
     // 切断イベントをディスパッチ
     // 名前空間を明示的に指定
-    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, bleMidiTx::MICROBIT_BLE_MIDI_TX_DISCONNECTED);
+    //microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, bleMidiTx::MICROBIT_BLE_MIDI_TX_DISCONNECTED);
 }
 
 void MicroBitBLEMIDIService::onUpdatesEnabled(const GattUpdatesEnabledCallbackParams *params)
