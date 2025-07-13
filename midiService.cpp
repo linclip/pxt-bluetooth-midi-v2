@@ -17,11 +17,15 @@ MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
     GattCharacteristic *midiChars[] = {&midiDataCharacteristic};
     GattService midiService(UUID_MIDI_SERVICE, midiChars, sizeof(midiChars) / sizeof(GattCharacteristic *));
 
+    // ★ サービス追加の成功/失敗をチェック
     if (ble.gattServer().addService(midiService) == BLE_STATUS_SUCCESS) {
-        // microbit.display.printAsync("MIDI SVC OK");
+        // microbit.display.printAsync("SVC OK"); // デバッグ用
     } else {
-        // microbit.display.printAsync("MIDI SVC Fail");
+        // microbit.display.printAsync("SVC FAIL"); // デバッグ用
+        // ここで何かエラーを示す処理（LED表示など）
+        microbit.panic(100); // 強制的にパニックさせてエラーコードで確認
     }
+
 
     ble.gap().onConnection(this, &MicroBitBLEMIDIService::onConnection);
     ble.gap().onDisconnection(this, &MicroBitBLEMIDIService::onDisconnection);
