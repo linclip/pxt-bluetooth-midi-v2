@@ -24,10 +24,16 @@ const static Uuid UUID_MIDI_DATA_CHAR(MIDIDataCharacteristicUUID_base);
 
 // カスタムイベントのソースIDとイベントコードを定義
 #define MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT (MICROBIT_ID_END + 1) // 新しいID
-enum MicroBitBleMidiTxServiceEvent {
-    MICROBIT_BLE_MIDI_TX_CONNECTED = 1,
-    MICROBIT_BLE_MIDI_TX_DISCONNECTED = 2,
-};
+
+namespace bleMidiTx { // ★この行を追加！
+    enum MicroBitBleMidiTxServiceEvent {
+        MICROBIT_BLE_MIDI_TX_CONNECTED = 1,
+        MICROBIT_BLE_MIDI_TX_DISCONNECTED = 2,
+    };
+    // クラス定義も namespace 内に置くか、または extern class宣言をする
+    // 今回はクラス定義そのものは namespace 外に置いて、shim経由でアクセスするのが一般的
+    // なので、enumだけnamespace内に置くのが良いでしょう。
+} // ★この行を追加！
 
 class MicroBitBLEMIDIService : public MicroBitBLEService
 {
