@@ -1,5 +1,5 @@
 {
-    "name": "microbit-ble-midi-tx",
+    "name": "bluetooth-midi-v2",
     "version": "0.0.1",
     "description": "Bluetooth MIDI Transmit for micro:bit V2 with timestamping.",
     "dependencies": {
