@@ -39,18 +39,18 @@ MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
 
 void MicroBitBLEMIDIService::onConnection(const Gap::ConnectionCallbackParams *params)
 {
-    // microbit.display.printAsync("MIDI Conn");
     notificationsEnabled = false;
     // 接続イベントをディスパッチ
-    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_CONNECTED);
+    // 名前空間を明示的に指定
+    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, bleMidiTx::MICROBIT_BLE_MIDI_TX_CONNECTED);
 }
 
 void MicroBitBLEMIDIService::onDisconnection(const Gap::DisconnectionCallbackParams *params)
 {
-    // microbit.display.printAsync("MIDI Disc");
     notificationsEnabled = false;
     // 切断イベントをディスパッチ
-    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_DISCONNECTED);
+    // 名前空間を明示的に指定
+    microbit.messageBus.queue(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, bleMidiTx::MICROBIT_BLE_MIDI_TX_DISCONNECTED);
 }
 
 void MicroBitBLEMIDIService::onUpdatesEnabled(const GattUpdatesEnabledCallbackParams *params)
