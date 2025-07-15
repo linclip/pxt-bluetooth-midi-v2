@@ -4,8 +4,7 @@
     "version": "0.0.1",
     "dependencies": {
         "core": "*",
-        "pxt-midi": "github:microsoft/pxt-midi#v2.2.0",
-        "microbit": "*" // これは前回追加したもの、残しておく
+        "pxt-midi": "github:microsoft/pxt-midi#v2.2.0"
     },
     "files": [
         "main.ts",
@@ -17,10 +16,7 @@
     "testFiles": [
         "test.ts"
     ],
-    "targetVersions": {
-        // ★この "target": "6.0.25", の行を削除するか、"target": "*" に変更してください
-        // ★"targetId": "microbit" は残します
-        "targetId": "microbit"
-    },
+    "target": "microbit-v2", // ★ここを "microbit-v2" に修正します
+    // "targetVersions": { "targetId": "microbit" }, // ★この行は完全に削除します
     "public": true
 }
