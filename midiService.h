@@ -38,23 +38,24 @@ namespace bleMidiTx { // ★この行を追加！
 class MicroBitBLEMIDIService : public MicroBitBLEService
 {
 public:
-    GattCharacteristic midiDataCharacteristic;
+    GattCharacteristic midiDataCharacteristic;  // キャラクターリスティックは必要なので残す
 
+    // ★コンストラクタだけを残します
     MicroBitBLEMIDIService(MicroBit &microbit);
 
+    // ★以下の行は全て削除またはコメントアウトしてください
     // 既存の接続/切断イベントハンドラ
-    void onConnection(const Gap::ConnectionCallbackParams *params);
-    void onDisconnection(const Gap::DisconnectionCallbackParams *params);
-    void onUpdatesEnabled(const GattUpdatesEnabledCallbackParams *params);
-    void onUpdatesDisabled(const GattUpdatesDisabledCallbackParams *params);
-
-    bool sendMIDIData(const uint8_t *midi_data, uint16_t midi_len);
+    // void onConnection(const Gap::ConnectionCallbackParams *params);
+    // void onDisconnection(const Gap::DisconnectionCallbackParams *params);
+    // void onUpdatesEnabled(const GattUpdatesEnabledCallbackParams *params);
+    // void onUpdatesDisabled(const GattUpdatesDisabledCallbackParams *params);
+    // bool sendMIDIData(const uint8_t *midi_data, uint16_t midi_len);
 
 private:
     BLE &ble;
     MicroBit &microbit;
-    bool notificationsEnabled;
-    static const int MIDI_MAX_PACKET_SIZE = 20;
+    bool notificationsEnabled; // この変数も必要なので残す
+    static const int MIDI_MAX_PACKET_SIZE = 20; // この変数も必要なので残す
 };
 
 #endif // MICROBIT_BLE_MIDI_SERVICE_H
