@@ -4,7 +4,8 @@
     "description": "Bluetooth MIDI Transmit for micro:bit V2 with timestamping.",
     "dependencies": {
         "core": "*",
-        "pxt-midi": "github:microsoft/pxt-midi#v2.2.0"
+        "pxt-midi": "github:microsoft/pxt-midi#v2.2.0",
+        "microbit": "*" // ★この行を追加してみる
     },
     "files": [
         "main.ts",
@@ -18,7 +19,7 @@
     ],
     "public": true,
     "targetVersions": {
-        "target": "7.0.61",
+        "target": "6.0.25",
         "targetId": "microbit"
     },
     "supportedTargets": [
