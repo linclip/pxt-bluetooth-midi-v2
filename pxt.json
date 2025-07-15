@@ -5,7 +5,7 @@
     "dependencies": {
         "core": "*",
         "pxt-midi": "github:microsoft/pxt-midi#v2.2.0",
-        "microbit": "*" // ★この行を追加してみる
+        "microbit": "*"
     },
     "files": [
         "main.ts",
