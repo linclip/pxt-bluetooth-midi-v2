@@ -11,8 +11,11 @@ declare namespace bleMidiTx {
      * MIDIデータをBLE経由で送信します。
      * @param data 送信するMIDI生データ (MTSはC++側で付加)
      */
+
+    /*
     //% shim=bleMidiTx::_sendMidiData shim=bleMidiTx::_sendMidiData
     function _sendMidiData(data: Buffer): void;
+    */
 }
 
 // Auto-generated. Do not edit. Really.
