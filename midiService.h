@@ -3,9 +3,18 @@
 
 #include "MicroBit.h"
 #include "MicroBitBLEService.h"
+/*
 #include "ble/BLE.h"
 #include "ble/Gap.h"
 #include "ble/GattServer.h"
+*/
+#include "MicroBitBLEManager.h"
+#include "MicroBitBLEService.h"
+// 必要に応じて、もし特定のBLE機能で直接必要であれば、
+// #include "MicroBitGAP.h" // または類似のMicroBit固有のヘッダー
+// #include "MicroBitGattServer.h" // または類似のMicroBit固有のヘッダー
+// しかし、多くの場合、MicroBitBLEManager.h や MicroBitBLEService.h が
+// 必要な下位レベルのヘッダーを内部的にインクルードしてくれます。
 
 // Standard Bluetooth MIDI Service and Characteristic UUIDs (128-bit)
 // MIDI Service UUID: 03B80E5A-EDE8-4B33-A751-6CE34EC4C700
