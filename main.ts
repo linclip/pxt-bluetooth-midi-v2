@@ -25,12 +25,14 @@ namespace bleMidiTx {
         _initMidiService();
     }
 
+    // ★以下の全てのブロック定義と関数は削除またはコメントアウトしてください
     /**
      * MIDIノートオンメッセージを送信します。
      * @param note ノート番号 (0-127), 例: 60 (C4)
      * @param velocity ベロシティ (0-127), 例: 100
      * @param channel MIDIチャンネル (1-16), 例: 1
      */
+    /*
     //% blockId="ble_midi_tx_note_on" block="MIDI ノートオン|ノート %note|ベロシティ %velocity|チャンネル %channel"
     //% note.min=0 note.max=127 velocity.min=0 velocity.max=127 channel.min=1 channel.max=16
     //% inlineInputMode=inline
@@ -48,12 +50,15 @@ namespace bleMidiTx {
         // C++側の送信関数を呼び出す
         _sendMidiData(midiData);
     }
-
+    */
+    
     /**
      * MIDIノートオフメッセージを送信します。
      * @param note ノート番号 (0-127), 例: 60 (C4)
      * @param channel MIDIチャンネル (1-16), 例: 1
      */
+
+    /*
     //% blockId="ble_midi_tx_note_off" block="MIDI ノートオフ|ノート %note|チャンネル %channel"
     //% note.min=0 note.max=127 channel.min=1 channel.max=16
     //% inlineInputMode=inline
@@ -71,6 +76,7 @@ namespace bleMidiTx {
         // C++側の送信関数を呼び出す
         _sendMidiData(midiData);
     }
+    */
 
     // 他のMIDIメッセージ（CC, PBなど）も同様に追加可能
 
@@ -79,33 +85,40 @@ namespace bleMidiTx {
   * Bluetooth MIDIデバイスが接続されたときに実行します。
   * @param handler 接続時に実行されるコード
   */
+    /*
     //% blockId="ble_midi_tx_on_connected" block="Bluetooth MIDIが接続されたとき"
     //% subcategory="イベント"
     //% draggableParameters="reporter"
     export function onConnected(handler: () => void): void {
         control.onEvent(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_CONNECTED, handler);
     }
+    */
 
     /**
      * Bluetooth MIDIデバイスが切断されたときに実行します。
      * @param handler 切断時に実行されるコード
      */
+
+    /*
     //% blockId="ble_midi_tx_on_disconnected" block="Bluetooth MIDIが切断されたとき"
     //% subcategory="イベント"
     //% draggableParameters="reporter"
     export function onDisconnected(handler: () => void): void {
         control.onEvent(MICROBIT_ID_BLE_MIDI_TX_SERVICE_EVT, MICROBIT_BLE_MIDI_TX_DISCONNECTED, handler);
     }
+    */
 
     //% shim=bleMidiTx::_initMidiService
     function _initMidiService(): void {
         // C++実装
-        return;
+        return; // 明示的な return を残す
     }
 
+    /*
     //% shim=bleMidiTx::_sendMidiData
     function _sendMidiData(data: Buffer): void {
         // C++実装
         return;
     }
+    */
 }
