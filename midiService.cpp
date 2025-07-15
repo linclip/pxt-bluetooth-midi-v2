@@ -1,10 +1,11 @@
-#include "midiService.h"
+#include "midiService.h" // ヘッダーは含める
 
 // MicroBitインスタンスへのポインタ（グローバルまたはシングルトンで管理することが多い）
 // PXTのC++拡張機能では、通常 shim 関数内で MicroBit& を受け取る
 extern MicroBit uBit;
-static MicroBitBLEMIDIService *instance = nullptr;
+static MicroBitBLEMIDIService *instance = nullptr; // インスタンスポインタは残す
 
+// MicroBitBLEMIDIService クラスのコンストラクタのみ残します
 MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
     MicroBitBLEService(microbit_ref),
     ble(microbit_ref.ble),
@@ -17,26 +18,27 @@ MicroBitBLEMIDIService::MicroBitBLEMIDIService(MicroBit &microbit_ref) :
     GattCharacteristic *midiChars[] = {&midiDataCharacteristic};
     GattService midiService(UUID_MIDI_SERVICE, midiChars, sizeof(midiChars) / sizeof(GattCharacteristic *));
 
+    // サービス追加の成功/失敗をチェックするデバッグコードもここに残します
     // ★ サービス追加の成功/失敗をチェック
     if (ble.gattServer().addService(midiService) == BLE_STATUS_SUCCESS) {
-        // microbit.display.printAsync("SVC OK"); // デバッグ用
+         microbit.display.printAsync("SVC OK"); // デバッグ用
     } else {
-        // microbit.display.printAsync("SVC FAIL"); // デバッグ用
+        microbit.display.printAsync("SVC FAIL"); // デバッグ用
         // ここで何かエラーを示す処理（LED表示など）
         microbit.panic(100); // 強制的にパニックさせてエラーコードで確認
     }
 
+    // ★以下のイベントハンドラ登録の行は全て削除またはコメントアウトしてください
+    // ble.gap().onConnection(this, &MicroBitBLEMIDIService::onConnection);
+    // ble.gap().onDisconnection(this, &MicroBitBLEMIDIService::onDisconnection);
+    // ble.gattServer().onUpdatesEnabled(this, &MicroBitBLEMIDIService::onUpdatesEnabled);
+    // ble.gattServer().onUpdatesDisabled(this, &MicroBitBLEMIDIService::onUpdatesDisabled);
 
-    ble.gap().onConnection(this, &MicroBitBLEMIDIService::onConnection);
-    ble.gap().onDisconnection(this, &MicroBitBLEMIDIService::onDisconnection);
-    ble.gattServer().onUpdatesEnabled(this, &MicroBitBLEMIDIService::onUpdatesEnabled);
-    ble.gattServer().onUpdatesDisabled(this, &MicroBitBLEMIDIService::onUpdatesDisabled);
-
-    notificationsEnabled = false;
-    instance = this;
+    notificationsEnabled = false; // 必要なので残す
+    instance = this; // 必要なので残す
 }
 
-
+/*
 void MicroBitBLEMIDIService::onConnection(const Gap::ConnectionCallbackParams *params)
 {
     // ここをコメントアウト
@@ -92,11 +94,13 @@ bool MicroBitBLEMIDIService::sendMIDIData(const uint8_t *midi_data, uint16_t mid
 
     return ble.gattServer().notify(midiDataCharacteristic.getValueHandle(), packet, packet_len) == BLE_STATUS_SUCCESS;
 }
+*/
 
 // --- PXT MakeCode Shims ---
 // TypeScript (main.ts) から呼び出されるC++関数
 
 namespace bleMidiTx { // ★この行を追加！
+    // _initMidiService の Shim 関数のみ残します
     /**
      * Bluetooth MIDIサービスを初期化します。
      */
@@ -107,14 +111,17 @@ namespace bleMidiTx { // ★この行を追加！
         }
     }
 
+    // ★ _sendMidiData の Shim 関数は削除またはコメントアウトしてください
     /**
      * MIDIデータをBLE経由で送信します。
      * @param data 送信するMIDI生データ (MTSはC++側で付加)
      */
+    /*
     //% shim=bleMidiTx::_sendMidiData
     void _sendMidiData(Buffer data) {
         if (instance) {
             instance->sendMIDIData((const uint8_t*)data->data, data->length);
         }
     }
+    */
 } // ★この行を追加！
