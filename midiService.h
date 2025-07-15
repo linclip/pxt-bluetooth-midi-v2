@@ -4,13 +4,14 @@
 #include "MicroBit.h"
 #include "MicroBitBLEService.h"
 
+/*
 #include "ble/BLE.h"
 #include "ble/Gap.h"
 #include "ble/GattServer.h"
-/*
+*/
+
 #include "MicroBitBLEManager.h"
 #include "MicroBitBLEService.h"
-*/
 // Standard Bluetooth MIDI Service and Characteristic UUIDs (128-bit)
 // MIDI Service UUID: 03B80E5A-EDE8-4B33-A751-6CE34EC4C700
 const static uint8_t MIDIServiceUUID_base[] = {
