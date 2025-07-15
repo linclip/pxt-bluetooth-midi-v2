@@ -1,11 +1,11 @@
 {
-    "name": "bluetooth-midi-v2",
-    "version": "0.0.1",
+    "name": "microbit-ble-midi-tx",
     "description": "Bluetooth MIDI Transmit for micro:bit V2 with timestamping.",
+    "version": "0.0.1",
     "dependencies": {
         "core": "*",
         "pxt-midi": "github:microsoft/pxt-midi#v2.2.0",
-        "microbit": "*"
+        "microbit": "*" // これは前回追加したもの、残しておく
     },
     "files": [
         "main.ts",
@@ -17,12 +17,10 @@
     "testFiles": [
         "test.ts"
     ],
-    "public": true,
     "targetVersions": {
-        "target": "6.0.25",
+        // ★この "target": "6.0.25", の行を削除するか、"target": "*" に変更してください
+        // ★"targetId": "microbit" は残します
         "targetId": "microbit"
     },
-    "supportedTargets": [
-        "microbit"
-    ]
+    "public": true
 }
